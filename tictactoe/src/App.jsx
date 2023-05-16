@@ -1,5 +1,5 @@
-import Square from './components/square';
 import './style.scss';
+
 import Board from './components/Board';
 
 function App() {
