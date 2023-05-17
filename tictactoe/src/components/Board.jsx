@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import Square from './square';
+import { calculateWinner } from '../winner';
 
 const Board = () => {
   const [square, setSquares] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(false);
-
+  const winner = calculateWinner(square);
+  const player = isXNext ? 'X' : 'O';
+  const statusPlayer = winner
+    ? `Winner is ${winner}`
+    : `Next Player is ${player}`;
+  console.log(winner, 'winner');
   const handleSquareClick = clickedPosition => {
-    if (square[clickedPosition]) {
+    if (square[clickedPosition] || winner) {
       return;
     }
     setSquares(currentSquares => {
@@ -31,6 +37,7 @@ const Board = () => {
 
   return (
     <div className="board">
+      <h2>{statusPlayer}</h2>
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}
